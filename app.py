@@ -1,8 +1,12 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, session
 
+secret_key = os.environ.get("SECRET_KEY")
+if not secret_key:
+    raise RuntimeError("SECRET_KEY environment variable not set")
+
 app = Flask(__name__)
-app.secret_key = os.environ.get("SECRET_KEY", "dev")
+app.secret_key = secret_key
 
 # In-memory storage for simplicity
 patients = {}
