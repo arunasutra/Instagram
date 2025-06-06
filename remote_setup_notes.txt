@@ -1,0 +1,8 @@
+The application is configured to listen on all network interfaces. To make it accessible remotely:
+
+1. Deploy this folder to a server reachable from the internet.
+2. Ensure Python and the dependencies from `requirements.txt` are installed on that server.
+3. Open the firewall or security group to allow inbound connections on the port used by the app (default 5000).
+4. Run the application with `python app.py` and verify you can reach `http://<server-ip>:5000/` from a remote browser.
+
+Actual deployment (setting up a public server, DNS, HTTPS, etc.) must be performed manually outside of this repository.
