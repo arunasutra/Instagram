@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Welcome, {{ patient.name }}</h2>
+<form action="{{ url_for('add_note') }}" method="post">
+    <textarea name="note" rows="4" cols="50" placeholder="Write your notes here" required></textarea><br>
+    <button type="submit">Add Note</button>
+</form>
+<h3>Your Notes</h3>
+{% for note in patient.notes %}
+<div class="note">{{ loop.index }}. {{ note }}</div>
+{% else %}
+<p>No notes yet.</p>
+{% endfor %}
+{% endblock %}
