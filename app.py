@@ -1,6 +1,14 @@
 import os
 import sqlite3
-from flask import Flask, render_template, request, redirect, url_for, session, g
+from flask import (
+    Flask,
+    render_template,
+    request,
+    redirect,
+    url_for,
+    session,
+    g,
+)
 
 secret_key = os.environ.get("SECRET_KEY")
 if not secret_key:
@@ -52,9 +60,15 @@ def index():
     if 'patient_id' in session:
         pid = session['patient_id']
         db = get_db()
-        patient = db.execute('SELECT id, name FROM patients WHERE id=?', (pid,)).fetchone()
+        patient = db.execute(
+            'SELECT id, name FROM patients WHERE id=?',
+            (pid,),
+        ).fetchone()
         if patient:
-            notes = db.execute('SELECT note FROM notes WHERE patient_id=?', (pid,)).fetchall()
+            notes = db.execute(
+                'SELECT note FROM notes WHERE patient_id=?',
+                (pid,),
+            ).fetchall()
             patient_data = {
                 "id": patient["id"],
                 "name": patient["name"],
@@ -89,7 +103,10 @@ def add_note():
     pid = session.get('patient_id')
     if pid and note:
         db = get_db()
-        db.execute('INSERT INTO notes (patient_id, note) VALUES (?, ?)', (pid, note))
+        db.execute(
+            'INSERT INTO notes (patient_id, note) VALUES (?, ?)',
+            (pid, note),
+        )
         db.commit()
     return redirect(url_for('index'))
 
